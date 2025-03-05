@@ -7,11 +7,13 @@ import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
-import { ApointmentManagementRoutingModule } from "./apointment-management-routing.module";
-import { ProviderList } from "./apointment-management-provider-registrar";
-import { ApointmentListComponent } from "./components/apointment-list/apointment-list.component";
+import { ProviderList } from "./places-management-provider-registrar";
+import { PlacesListComponent } from "./components/places-list/places-list.component";
+import { PlacesManagementRoutingModule } from "./places-management-routing.module";
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AddPlacesComponent } from './components/add-places/add-places.component';
 @NgModule({
-  declarations: [ApointmentListComponent],
+  declarations: [PlacesListComponent, AddPlacesComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,11 +21,12 @@ import { ApointmentListComponent } from "./components/apointment-list/apointment
     BsDropdownModule,
     UIModule,
     TabsModule,
-    ApointmentManagementRoutingModule,
+    NgxPaginationModule,
+    PlacesManagementRoutingModule,
     NgSelectModule,
     PaginationModule.forRoot(),
     BsDatepickerModule.forRoot(),
   ],
   providers: [ProviderList],
 })
-export class ApointmentManagementModule {}
+export class PlacesManagementModule {}

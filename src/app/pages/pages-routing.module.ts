@@ -8,7 +8,7 @@ const routes: Routes = [
     component: DefaultComponent
   },
   { path: '', component: DefaultComponent },
-  { path: 'apoint-management', loadChildren: () => import('./apointments/apoint-management/apointment-management.module').then(m => m.ApointmentManagementModule) },
+  { path: 'places-management', loadChildren: () => import('./places/places-management/places-management.module').then(m => m.PlacesManagementModule) },
   { path: 'user-management', loadChildren: () => import('./user/user-management/user-management.module').then(m => m.UserManagementModule) }
 ];
 

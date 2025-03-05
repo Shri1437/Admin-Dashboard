@@ -1,0 +1,118 @@
+<div class="container-fluid">
+  <div class="row align-items-baseline">
+    <div class="col-sm-6">
+      <div class="page-title-box d-flex align-items-baseline justify-content-between">
+        <h4 class="mb-0 font-size-18">Places List</h4>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="d-flex justify-content-end">
+        <button type="button" routerLink="/places/create-place"
+          class="btn btn-info btn-sm waves-effect waves-light addContact-modal mb-2">
+          <i class="mdi mdi-plus me-1"></i> Create Place
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <div class="search-box me-2 mb-2 d-inline-block w-100">
+                <div class="position-relative">
+                  <input type="text" class="form-control" [(ngModel)]="searchTerm"
+                         (input)="onSearchChange(searchTerm)" placeholder="Search Places...">
+                  <i class="bx bx-search-alt search-icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Place Title</th>
+                  <th scope="col">Location Name</th>
+                  <th scope="col" style="width: 200px;">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngIf="placesDataTableList.DataList.length == 0">
+                  <td colspan="12" class="text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0,0,256,256">
+                      <!-- Empty state icon -->
+                    </svg>
+                    <p>No places available</p>
+                  </td>
+                </tr>
+
+                <tr *ngFor="let place of placesDataTableList?.DataList; let index=index">
+                  <td>{{ place.PlaceName }}</td>
+                  <td>{{ place.LocationType }}</td>
+                  <td>{{ place.City }}</td>
+                  <td>{{ place.AddedDate | date:'dd-MM-yyyy' }}</td>
+
+                  <td>
+                    <ul class="list-inline font-size-20 contact-links mb-0">
+                      <li class="list-inline-item">
+                        <div dropdown class="dropdown">
+                          <a dropdownToggle href="javascript: void(0);" class="dropdown-toggle card-drop">
+                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                          </a>
+                          <ul *dropdownMenu class="dropdown-menu dropdown-menu-end">
+                            <li >
+                              <a href="javascript:void(0);" [routerLink]="['/places/edit-place', place.Id]"
+                                 class="dropdown-item edit-list">
+                                <i class="mdi mdi-pencil font-size-16 text-success me-1"></i> Edit
+                              </a>
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);" (click)="removePlace(removeItemModal, place.Id)"
+                                 class="dropdown-item remove-list">
+                                <i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Delete
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="page-info">
+                  <div class="items-per-page">
+                    <label for="itemsPerPage">Items per page:</label>
+                    <select id="itemsPerPage" class="form-select w-25" [(ngModel)]="searchModel.pageSize"
+                      (change)="onPageSizeChange()">
+                      <option [ngValue]="5">5</option>
+                      <option [ngValue]="10">10</option>
+                      <option [ngValue]="20">20</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="pagination">
+                  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
